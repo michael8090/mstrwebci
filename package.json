@@ -6,8 +6,12 @@
         "installCiHooks": "./installCiHooks.js",
         "uninstallCiHooks": "./uninstallCiHooks.js"
     },
+    "main": "./main.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "dependencies": {
+        "q": "~1.0.1"
     },
     "repository": {
         "type": "git",

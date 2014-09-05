@@ -6,7 +6,7 @@
 (function () {
     var fs = require('fs');
     var path = require('path');
-    var utils = require('./hooks/utils');
+    var utils = require('./utils');
 
     utils.findGitRoot(function (err, root) {
         if (err) {

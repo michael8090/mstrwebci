@@ -28,7 +28,7 @@ exports.findPackageRoot = function (base) {
 };
 
 exports.forEachHookFile = function (dest, callback) {
-    var sourceDir = __dirname,
+    var sourceDir = path.join(__dirname, 'hooks'),
         destDir = dest,
         hooks = fs.readdirSync(sourceDir);
     hooks.forEach(function (h) {

@@ -30,9 +30,7 @@
 
         if (backendFiles.length) {
             console.log('building the whole project...');
-            commander.buildClean(function() {
-                commander.buildDeploy();
-            });
+            commander.buildClean().then(commander.buildDeploy);
         } else if (frontendFiles.length) {
             console.log('building js bundles...');
             commander.buildJsBundles();
