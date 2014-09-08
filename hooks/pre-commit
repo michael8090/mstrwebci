@@ -1,2 +1,2 @@
 #!/bin/sh
-node .git/hooks/pre-commit.js $*
+node .git/hooks/preTest.js $*
