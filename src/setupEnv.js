@@ -4,4 +4,5 @@
 (function () {
     var utils = require('./utils');
     global.projectRoot = utils.findProjectRoot();
+    global.packageRoot = utils.findPackageRoot();
 })();

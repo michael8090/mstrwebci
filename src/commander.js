@@ -8,10 +8,11 @@
         Q = require('q');
 
     var projectRoot = global.projectRoot,
-        buildCmd = path.resolve(projectRoot, 'BIWebApp/build/build');
+        buildRoot = path.resolve(projectRoot, 'BIWebApp/build'),
+        buildCmd = path.resolve(buildRoot, 'build');
 
     function getHandler(deferred) {
-        return function(e, stdout, stderr) {
+        return function(e, stdout/*, stderr*/) {
             console.log(stdout);
 
             if (e) {

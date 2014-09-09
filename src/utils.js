@@ -23,6 +23,8 @@
         });
     }
 
+    exports.findPackageRoot = findPackageRoot;
+
     // use git rev-parse to find the .git directory
     exports.findGitRoot = function (callback) {
         exec('git rev-parse --show-toplevel', function (err, stdout) {

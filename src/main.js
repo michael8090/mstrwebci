@@ -3,4 +3,5 @@
  */
 (function () {
     exports.build = require('./builder').build;
+    exports.validate = require('./validator').validate;
 })();

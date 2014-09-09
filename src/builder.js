@@ -3,7 +3,6 @@
  */
 (function () {
     var path = require('path'),
-        utils = require('./utils'),
         commander = require('./commander'),
         Q = require('q');
 
