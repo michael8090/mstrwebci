@@ -1,10 +1,11 @@
 {
     "name": "mstrwebci",
-    "version": "1.0.21",
+    "version": "1.0.28",
     "description": "this package installs a nodejs hook under a git directory, which performs some pre-commit tests",
     "bin": {
         "installCiHooks": "./bin/installCiHooks.js",
-        "uninstallCiHooks": "./bin/uninstallCiHooks.js"
+        "uninstallCiHooks": "./bin/uninstallCiHooks.js",
+        "startCIServer": "./bin/startServer.js"
     },
     "main": "src/main.js",
     "scripts": {
@@ -12,7 +13,8 @@
     },
     "dependencies": {
         "q": "~1.0.1",
-        "xml2js": ">=0.4"
+        "xml2js": ">=0.4",
+        "cheerio": ">= 0.17.0"
     },
     "repository": {
         "type": "git",

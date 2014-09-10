@@ -4,32 +4,55 @@
 (function () {
     var http = require('http'),
         Q = require('q'),
+        util = require('util'),
         getDependentTasks = require('./dependencyParser').getDependentTasks,
-        httpBase = 'http://localhost:8090';
+        serverConfig = require('./taskConfig').server,
+        httpBase = 'http://' + serverConfig.ip + ':' + serverConfig.port;
     exports.validate = function(files) {
-        var promises = [],
-            tasks = getDependentTasks(files);
-        console.log('in validator.');
-        console.log(tasks);
-        tasks.forEach(function (task) {
-            console.log('sending request...' + task.name);
-            var deferred = Q.defer(),
-                req = http.request(httpBase + '?testSuit=' + task.testSuits.join('+'), function (response) {
-                    console.log('get response');
-                    var statusCode = response.statusCode;
-                    if (statusCode !== 200) {
-                        console.log('error in http request!');
-                        deferred.reject(statusCode);
+        var tasks = getDependentTasks(files),
+            testCases = [];
+        console.log('sending requests for the tasks:');
+        tasks.forEach(function (t) {
+            console.log(t.name + ': ');
+            t.testCases.forEach(function (c) {
+                console.log('\t' + c);
+                if (testCases.indexOf(c) === -1) {
+                    testCases.push(c);
+                }
+            });
+        });
+        console.log('');
+
+//        console.log('sending request for tests: \n' + testCases.join('\n') + '...');
+
+        var deferred = Q.defer(),
+            reqUrl = httpBase + '?testCases=' + testCases.join('+'),
+            req = http.request(reqUrl, function (response) {
+                var statusCode = response.statusCode,
+                    status = http.STATUS_CODES[statusCode];
+                if (status !== 'OK') {
+                    console.log('error in http request!');
+                    deferred.reject(statusCode);
+                }
+                console.log('Tests are running on server');
+                response.setEncoding('utf8');
+                response.on('data', function (chunk) {
+                    if (chunk === 'Running') {
+                        util.print('.');
+                    } else if (chunk === 'OK') {
+                        console.log('\nTests are passed!');
+                        deferred.resolve(chunk);
                     } else {
-                        deferred.resolve(statusCode);
+                        console.log('\nTest failed.');
+                        deferred.reject(chunk);
                     }
                 });
-            req.on('error', function (e) {
-                deferred.reject(e);
             });
-            req.end();
-            promises.push(deferred.promise);
+//        console.log('Url: ' + reqUrl);
+        req.on('error', function (e) {
+            deferred.reject(e);
         });
-        return Q.all(promises);
+        req.end();
+        return deferred.promise;
     };
 })();

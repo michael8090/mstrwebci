@@ -21,6 +21,7 @@
         }
         var frontendFiles = [],
             backendFiles = [];
+        console.log('Modified files:');
         files.forEach(function(f) {
             var extName = path.extname(f);
             if (FE_EXT_NAMES.indexOf(extName) !== -1) {
@@ -30,6 +31,7 @@
             }
             console.log(f);
         });
+        console.log('');
 
         if (backendFiles.length) {
             console.log('building the whole project...');

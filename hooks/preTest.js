@@ -5,16 +5,20 @@
     var exec = require('child_process').exec,
         CI = require('mstrwebci');
 
-    console.log('in pre-commit hook.');
-
     exec('git diff --name-only --cached', function(e, stdout) {
         var files = stdout.split('\n');
         CI.build(files)
             .then(function () {
                 console.log('start validating...');
                 return CI.validate(files);
-            }).then(function() {
+            })
+            .then(function() {
                 console.log('Test completed! You\'re ready to push the codes now.');
+            })
+            .fail(function(msg) {
+                console.log('Validating failed. Please resolve and the problems and retry: ' + msg);
+            })
+            .done(function () {
                 //debug only, to stop the git
                 setTimeout(function () {
                     process.exit(1);
