@@ -1,0 +1,50 @@
+{
+  "tasks": [
+    {
+      "name": "heatmap",
+      "path": "mojo/js/source/heatmap/vi/VisHeatMap.js",
+      "buildTargets": ["js-bundles"],
+      "testCases": ["Baselines\\1004_Acceptance_Rendering_Heatmap.html"]
+    },
+    {
+      "name": "netviz",
+      "path": "mojo/js/source/netviz/VisNetwork.js",
+      "buildTargets": ["js-bundles"],
+      "testCases": ["Baselines\\1005_Acceptance_Rendering_Netviz.html"]
+    },
+    {
+      "name": "gm",
+      "path": "mojo/js/source/gm/VisGraphMatrix.js",
+      "buildTargets": ["js-bundles"],
+      "testCases": [
+        "Baselines\\1001_Acceptance_Rendering.html",
+        "Baselines\\1002_Acceptance_Rendering.html",
+        "Baselines\\1003_Acceptance_Rendering.html",
+        "Baselines\\1004_Acceptance_DataExplorationProperties.html",
+        "Baselines\\1005_Acceptance_FormattingProperties.html",
+        "Baselines\\1006_CombinationDualAixs.html",
+        "Baselines\\1007_TrendlineReferenceLine.html"
+      ]
+    }
+  ],
+  "server": {
+    "ip": "localhost",
+    "port": 8080
+  },
+  "dailyResultPath": "\\\\chn-team-ke1\\Documentation\\Widget Team\\HTML5 VI\\ABA Test\\Daiy Test",
+  "robotPath": "C:\\Users\\yohuang\\Desktop\\HTML5VI_cp",
+  "clearcaseViewPath": "D:\\develop\\ccviews\\yohuang_view_main_aba",
+  "mail": {
+    "auth": {
+      "username": "test@test.com",
+      "password": "test"
+    },
+    "mailOptions": {
+      "from": "ABA Test Robot<test@test.com>",
+      "to": "Li, Xiaoli <xiali@microstrategy.com>; Jiang, Yongli <yojiang@microstrategy.com>; Huang, Yong <yohuang@microstrategy.com>; Li, Chen <cheli@microstrategy.com>; Li, Boyu <boli@microstrategy.com>; Zhang, Hongchao <hozhang@microstrategy.com>; Zhu, Qing <qzhu@microstrategy.com>; Shi, Dong (Stone) <dshi@microstrategy.com>; Zhou, Haizhan <hazhou@microstrategy.com>; Yang, Huanling (Ivy) <huyang@microstrategy.com>; Zheng, Jiaxiang <jiaxzheng@microstrategy.com>; Lin, Chuntao (Lisa) <chulin@microstrategy.com>; Zhang, Xiangyu <xianzhang@microstrategy.com>; Wang, Haifeng <haifwang@microstrategy.com>",
+      "cc": "Chen, Liang <lchen@microstrategy.com>; Jiang, Hong <hojiang@microstrategy.com>; Jiang, Wei (Irene) <wjiang@microstrategy.com>; Suo, Fang <fsuo@microstrategy.com>; Zhang, Yue (Judy) <yue.zhang@microstrategy.com>"
+      "subject": "Daily ABA Test",
+      "html": "<p><a href=\"{{URL}}\">Here</a> is the result of today.</p>"
+    }
+  }
+}
