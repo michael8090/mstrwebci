@@ -1,7 +1,8 @@
 (function () {
     var path = require('path'),
         exec = require('child_process').exec,
-        fs = require('fs');
+        fs = require('fs'),
+        config = require('../taskConfig.json');
 
     function findInParentPath(currentPath, isFound) {
         var p = currentPath;
@@ -45,7 +46,7 @@
     };
 
     exports.findProjectRoot = function () {
-        var projectRoot = findInParentPath(process.cwd(), function (p) {
+        var projectRoot = config.clearcaseViewPath || findInParentPath(process.cwd(), function (p) {
             return fs.readdirSync(p).indexOf('BIWebApp') !== -1;
         });
         if (projectRoot) {

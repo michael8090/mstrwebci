@@ -1,11 +1,12 @@
+#!/usr/bin/env node
 /**
  * Created by yohuang on 11/10/2014.
  */
 var CI = require('../src/main'),
     schedule = require('node-schedule'),
-    config = require('../taskConfig');
+    config = require('../taskConfig.json');
 var rule = new schedule.RecurrenceRule();
-rule.hour = 15;
+//rule.hour = 15;
 
 schedule.scheduleJob(rule, function(){
     process.chdir(config.clearcaseViewPath);
@@ -18,6 +19,6 @@ schedule.scheduleJob(rule, function(){
             console.log('passed.');
         })
         .fail(function () {
-            console.log('failed');
+            console.log('failed.');
         });
 });

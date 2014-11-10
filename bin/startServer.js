@@ -6,13 +6,13 @@
 (function () {
     var http = require('http'),
         exec = require('child_process').exec,
-        taskConfig = require('../taskConfig'),
+        taskConfig = require('../taskConfig.json'),
         xml2js = require('xml2js'),
         fs = require('fs'),
         path = require('path'),
-        URL = require('url'),
         cheerio = require('cheerio'),
-        util = require('util');
+        util = require('util'),
+        mailer = require('nodemailer');
 
     var robotPath = taskConfig.robotPath;
     if (!fs.existsSync(robotPath)) {
@@ -51,11 +51,32 @@
         isRunningTest = true;
 
         var rejectAbaTest = function (msg) {
-            console.log('Got an error when starting to run a test: ');
-            console.log(msg);
-            console.log('Rejecting the ABA test...');
-            res.end('Failed: ' + JSON.stringify(msg));
-        };
+                console.log('Got an error when starting to run a test: ');
+                console.log(msg);
+                console.log('Rejecting the ABA test...');
+                res.end('Failed: ' + JSON.stringify(msg));
+            },
+            passAbaTest = function () {
+                console.log('Tests are passed.');
+                var mailConfig = taskConfig.mail,
+                    transporter = mailer.createTransport({
+                        service: 'gmail',
+                        auth: {
+                            user: mailConfig.username,
+                            pass: mailConfig.password
+                        }
+                    });
+                mailConfig.mailOptions.html = mailConfig.mailOptions.html.replace('{{URL}}', dailyResultPath);
+                transporter.sendMail(mailConfig.mailOptions, function (err, info) {
+                    if (err) {
+                        console.log('sending email failed:');
+                        console.log(err);
+                    } else {
+                        console.log("Emails sent: " + info.response);
+                    }
+                });
+            };
+
         res.writeHead(200, {'Content-Type': 'text/plain'});
         try {
             req.setEncoding('utf8');
@@ -112,7 +133,7 @@
                         rejectAbaTest('There are ' + failedNumber + ' cases failed in the requested tests.');
                         return ;
                     }
-                    console.log('Tests are passed.');
+                    passAbaTest();
                     res.end('OK');
                 });
             });

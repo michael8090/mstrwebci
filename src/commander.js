@@ -103,7 +103,7 @@
 
     exports.updateView = function() {
         global.lastUpdateTime = new Date();
-        getPromiseAfterCmd(updateCmd);
+        return getPromiseAfterCmd(updateCmd);
     };
 
     exports.buildClean = function() {
