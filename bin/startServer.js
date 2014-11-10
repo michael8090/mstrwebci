@@ -6,7 +6,7 @@
 (function () {
     var http = require('http'),
         exec = require('child_process').exec,
-        taskConfig = require('../src/taskConfig'),
+        taskConfig = require('../taskConfig'),
         xml2js = require('xml2js'),
         fs = require('fs'),
         path = require('path'),
@@ -80,6 +80,9 @@
                 if (!fs.existsSync(outputFilePath)) {
                     rejectAbaTest('There is not output file: ' + outputFilePath);
                     return ;
+                }
+                if (fs.existsSync(dailyResultPath)) {
+                    fs.mkdirSync(dailyResultPath);
                 }
                 exec('cp -fr' + robotOutputPath + ' ' + dailyResultPath, function (err, stdout, stderr) {
                     if (err) {

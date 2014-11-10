@@ -5,7 +5,7 @@
     var fs = require('fs'),
         parseString = require('xml2js').parseString,
         path = require('path'),
-        tasks = require('./taskConfig').tasks;
+        tasks = require('./../taskConfig').tasks;
     require('./setupEnv');
 
     var projectRoot = global.projectRoot,

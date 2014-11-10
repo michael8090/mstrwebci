@@ -3,7 +3,7 @@
  */
 var CI = require('../src/main'),
     schedule = require('node-schedule'),
-    config = require('../src/taskConfig');
+    config = require('../taskConfig');
 var rule = new schedule.RecurrenceRule();
 rule.hour = 15;
 

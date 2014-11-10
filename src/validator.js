@@ -6,7 +6,7 @@
         Q = require('q'),
         util = require('util'),
         getDependentTasks = require('./dependencyParser').getDependentTasks,
-        serverConfig = require('./taskConfig').server,
+        serverConfig = require('./../taskConfig').server,
         httpBase = 'http://' + serverConfig.ip + ':' + serverConfig.port;
     exports.validate = function(files) {
         var tasks = getDependentTasks(files),
