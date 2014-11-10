@@ -21,7 +21,10 @@
     var robotConfigPath = path.resolve(robotPath, 'TestSuite.xml'),
         robotConfigBackupPath = robotConfigPath + '.backup',
         robotCmdPath = path.resolve(robotPath, 'run_local.bat'),
-        outputPath = path.join(robotPath, 'Output/output.html');
+        robotOutputPath = path.resolve(robotPath, 'Output'),
+        outputFilePath = path.join(robotOutputPath, 'output.html'),
+        date = new Date(),
+        dailyResultPath = taskConfig.dailyResultPath + '\\' + date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 
     if (!fs.existsSync(robotConfigBackupPath)) {
         fs.createReadStream(robotConfigPath).pipe(fs.createWriteStream(robotConfigBackupPath));
@@ -74,11 +77,20 @@
                     rejectAbaTest(err);
                     return ;
                 }
-                if (!fs.existsSync(outputPath)) {
-                    rejectAbaTest('There is not output file: ' + outputPath);
+                if (!fs.existsSync(outputFilePath)) {
+                    rejectAbaTest('There is not output file: ' + outputFilePath);
                     return ;
                 }
-                fs.readFile(outputPath, function (err, stdout) {
+                exec('cp -fr' + robotOutputPath + ' ' + dailyResultPath, function (err, stdout, stderr) {
+                    if (err) {
+                        console.log('could not copy the results to the file path: ' + taskConfig.dailyResultPath);
+                        console.log(stdout);
+                        console.log(stderr);
+                    } else {
+                        console.log('copy done');
+                    }
+                });
+                fs.readFile(outputFilePath, function (err, stdout) {
                     if (err) {
                         rejectAbaTest(err);
                         return;
@@ -87,7 +99,7 @@
                         result = $('#testSummary').find('div > table > tr > .detailTableContentFail'),
                         failedNumber = result.first().text();
                     if (failedNumber === undefined) {
-                        rejectAbaTest('We cannot read the result from the output file: ' + outputPath);
+                        rejectAbaTest('We cannot read the result from the output file: ' + outputFilePath);
                         return;
                     }
                     console.log('failedNumber: ' + failedNumber);

@@ -5,7 +5,8 @@
     "bin": {
         "installCiHooks": "./bin/installCiHooks.js",
         "uninstallCiHooks": "./bin/uninstallCiHooks.js",
-        "startCIServer": "./bin/startServer.js"
+        "startCIServer": "./bin/startServer.js",
+        "startABADaemon": "./bin/startABADaemon.js"
     },
     "main": "src/main.js",
     "scripts": {
@@ -14,7 +15,8 @@
     "dependencies": {
         "q": "~1.0.1",
         "xml2js": ">=0.4",
-        "cheerio": ">= 0.17.0"
+        "cheerio": ">= 0.17.0",
+        "node-schedule": "*"
     },
     "repository": {
         "type": "git",

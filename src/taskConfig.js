@@ -29,8 +29,10 @@
                 'Baselines\\1001_Acceptance_Rendering.html',
                 'Baselines\\1002_Acceptance_Rendering.html',
                 'Baselines\\1003_Acceptance_Rendering.html',
-                'Baselines\\1007_TrendlineReferenceLine.html',
-                'Baselines\\1006_CombinationDualAixs.html'
+                'Baselines\\1004_Acceptance_DataExplorationProperties.html',
+                'Baselines\\1005_Acceptance_FormattingProperties.html',
+                'Baselines\\1006_CombinationDualAixs.html',
+                'Baselines\\1007_TrendlineReferenceLine.html'
             ]
         }
     ];
@@ -38,7 +40,9 @@
     //server
     exports.server = {
         ip: 'localhost',
-        port: 8090
+        port: 8080
     };
-    exports.robotPath = 'D:\\abaRobot';
+    exports.robotPath = 'E:\\abaRobot';//it's not right
+    exports.clearcaseViewPath = 'E:\\ccviews\\yohuang_view_main_branch_local';
+    exports.dailyResultPath = '\\\\chn-team-ke1\\Documentation\\Widget Team\\HTML5 VI\\ABA Test\\Daiy Test';
 })();

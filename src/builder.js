@@ -38,7 +38,7 @@
             commander.buildClean()
                 .then(commander.buildDeploy)
                 .then(function () {
-                    deferred.resolve('build completed.');
+                    deferred.resolve(files);
                 })
                 .fail(function (e) {
                     deferred.reject('build failed with exit code: ' + e.code);
@@ -47,7 +47,7 @@
             console.log('building js bundles...');
             commander.buildJsBundles()
                 .then(function () {
-                    deferred.resolve('build completed.');
+                    deferred.resolve(files);
                 })
                 .fail(function (e) {
                     deferred.reject('build failed with exit code: ' + e.code);
