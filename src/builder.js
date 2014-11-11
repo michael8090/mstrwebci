@@ -52,6 +52,8 @@
                 .fail(function (e) {
                     deferred.reject('build failed with exit code: ' + e.code);
                 });
+        } else {
+            deferred.resolve(files);
         }
         return deferred.promise;
     };

@@ -29,11 +29,11 @@
   ],
   "server": {
     "ip": "localhost",
-    "port": 8080
+    "port": 9090
   },
   "dailyResultPath": "\\\\chn-team-ke1\\Documentation\\Widget Team\\HTML5 VI\\ABA Test\\Daiy Test",
-  "robotPath": "C:\\Users\\yohuang\\Desktop\\HTML5VI_cp",
-  "clearcaseViewPath": "D:\\develop\\ccviews\\yohuang_view_main_aba",
+  "robotPath": "E:\\ABA\\robot",
+  "clearcaseViewPath": "E:\\ccviews\\yohuang_view_main_branch_local",
   "mail": {
     "auth": {
       "username": "test@test.com",
@@ -42,7 +42,7 @@
     "mailOptions": {
       "from": "ABA Test Robot<test@test.com>",
       "to": "Li, Xiaoli <xiali@microstrategy.com>; Jiang, Yongli <yojiang@microstrategy.com>; Huang, Yong <yohuang@microstrategy.com>; Li, Chen <cheli@microstrategy.com>; Li, Boyu <boli@microstrategy.com>; Zhang, Hongchao <hozhang@microstrategy.com>; Zhu, Qing <qzhu@microstrategy.com>; Shi, Dong (Stone) <dshi@microstrategy.com>; Zhou, Haizhan <hazhou@microstrategy.com>; Yang, Huanling (Ivy) <huyang@microstrategy.com>; Zheng, Jiaxiang <jiaxzheng@microstrategy.com>; Lin, Chuntao (Lisa) <chulin@microstrategy.com>; Zhang, Xiangyu <xianzhang@microstrategy.com>; Wang, Haifeng <haifwang@microstrategy.com>",
-      "cc": "Chen, Liang <lchen@microstrategy.com>; Jiang, Hong <hojiang@microstrategy.com>; Jiang, Wei (Irene) <wjiang@microstrategy.com>; Suo, Fang <fsuo@microstrategy.com>; Zhang, Yue (Judy) <yue.zhang@microstrategy.com>"
+      "cc": "Chen, Liang <lchen@microstrategy.com>; Jiang, Hong <hojiang@microstrategy.com>; Jiang, Wei (Irene) <wjiang@microstrategy.com>; Suo, Fang <fsuo@microstrategy.com>; Zhang, Yue (Judy) <yue.zhang@microstrategy.com>",
       "subject": "Daily ABA Test",
       "html": "<p><a href=\"{{URL}}\">Here</a> is the result of today.</p>"
     }

@@ -35,7 +35,7 @@
                             if (!--pending) {
                                 done(null, results);
                             }
-                        });
+                        }, filter);
                     } else {
                         if (filter(file, stat)) {
                             results.push(file);
@@ -65,12 +65,13 @@
     function getPromiseAfterCmd(cmd) {
         var deferred = Q.defer();
         console.log('executing the command: ' + cmd);
-        exec(cmd, getHandler(deferred));
+        exec(cmd, {maxBuffer: 1024 * 1024 * 16}, getHandler(deferred));
         return deferred.promise;
     }
 
     exports.getModifiedFiles = function() {
-        var startTime = global.lastUpdateTime || -1;
+        var startTime = global.lastCheckTime || -1;
+        global.lastCheckTime = new Date();
         //TODO: read the updated files from the log file "*.updt" under the project root
         //we just read the file states to do it for now
         var deferred = Q.defer();
@@ -102,8 +103,19 @@
     };
 
     exports.updateView = function() {
-        global.lastUpdateTime = new Date();
-        return getPromiseAfterCmd(updateCmd);
+        var deferred = Q.defer();
+        console.log('executing the command: ' + updateCmd);
+        exec(updateCmd, {maxBuffer: 1024 * 1024 * 16}, function(e, stdout/*, stderr*/) {
+            console.log(stdout);
+
+            if (e) {
+                console.log(e);
+                deferred.resolve(e);//always resolve the promise, ignore the errors inside it
+            } else {
+                deferred.resolve(stdout);
+            }
+        });
+        return deferred.promise;
     };
 
     exports.buildClean = function() {
